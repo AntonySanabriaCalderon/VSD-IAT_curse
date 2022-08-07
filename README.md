@@ -131,3 +131,180 @@ Percentage of Flop Ratio =
 - less opensta_main.timing.rpt
     
     ![Untitled](LAB%20Day%201%2001eba55d003146dd83abee58aaca4019/Untitled%2027.png)
+
+
+
+
+
+
+# LAB Day 2
+
+## 1. SK1 - Chip Floor planning considerations
+
+### L6 - Steps to run floorplan using OpenLANE
+
+The next step is the floorplaning, first go to: Desktop/work/tools/openlane_working_dir/openlane/configuration
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled.png)
+
+Open README file: less README.md
+
+Inside are the variables for syntesis and Floorplaning
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%201.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%202.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%203.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%204.png)
+
+Let´s open: less floorplan.tcl
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%205.png)
+
+In another terminal open config.tcl file, is located in: Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%206.png)
+
+In terminal with Openlane and the synthesis type: run_floorplan
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%207.png)
+
+---
+
+### L7 - Review floorplan files and steps to view floorplan
+
+To analize the results type: Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs
+
+We need see the latest file, open it using: less 4-ioPlacer.log
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%208.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%209.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2010.png)
+
+open config.tcl → This is the configuration that is taken by the flow
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2011.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2012.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2013.png)
+
+Open file … less sky130A_sky130_fd_sc_hd_config.tcl
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2014.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2015.png)
+
+How floorplan looks?
+
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/fecha/results/floorplan 
+
+ls -ltr
+
+lless picorv32a.floorplan.def → Open “.def” file
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2016.png)
+
+Here you can see the area of your complete die. (a b) (c d)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2017.png)
+
+area: (660685/1000)[um]*(671405/1000)[um]= 443.587[nm] 
+
+Let´s see the floorplaning
+
+> magic -T /home/**USER**/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+> 
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2018.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2019.png)
+
+---
+
+## L8 - Review floorplan layout in Magic
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2020.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2021.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2022.png)
+
+To select a certain block in layout, move the mouse over it and press S.
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2023.png)
+
+Seelect an horizontal pin. And type “what” in the tkcon window. The result indicates the layer of the pin. → Metal 3 (como nosotros le indicamos en la config)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2024.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2025.png)
+
+Select a vertical pin. And type “what” in the tkcon window. The result indicates the layer of the pin. → Metal 4 (como nosotros le indicamos en la config)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2026.png)
+
+These are dcapcells.
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2027.png)
+
+These are tapcells. They connects Ground to Substrate, and VDD to —— in CMOS Technology.
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2028.png)
+
+At bottom left corner, there are std cells. Floorplan is not focused on them.
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2029.png)
+
+To quit Magic… File - Quit - Yes
+
+## SK2 - Library Binding and Placement
+
+### SKY_L5 - Congestion aware placement using RePlAce
+
+Placement in OpenLane occurs in two stages:
+
+1. Global Placement 
+2. Detail Placement
+
+In the Floorplanning window type: run_placement
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2030.png)
+
+---
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2031.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2032.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2033.png)
+
+---
+
+Let´s see it in magic
+
+Go to: Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/fecha/results/placement
+
+Type: magic -T /home/**USER**/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2034.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2035.png)
+
+Magic opens and you could see the placement of cells.
+
+Zoom in to see the cells.
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2036.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2037.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2038.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2039.png)
+
+![Untitled](LAB%20Day%202%20aa7b35b5cb9747048f4ab147cb1527f6/Untitled%2040.png)
