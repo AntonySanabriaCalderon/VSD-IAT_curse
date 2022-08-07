@@ -143,7 +143,7 @@ Let´s see the reports: less yosys_2.stat.rpt
 
 # LAB Day 2
 
-## 1. SK1 - Chip Floor planning considerations
+## SK1 - Chip Floor planning considerations
 
 ### L6 - Steps to run floorplan using OpenLANE
 
