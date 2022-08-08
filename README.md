@@ -750,3 +750,67 @@ Now have another error, show something with an floorplan file, the other error i
 ![Untitled](LAB%20Day%204%2015b742d48402428fac4236e8c097df95/Untitled%2049.png)
 
 ![Untitled](LAB%20Day%204%2015b742d48402428fac4236e8c097df95/Untitled%2050.png)
+
+
+
+
+
+
+
+
+
+
+
+# LAB Day 5
+
+# Final steps for RTL2GDS using tritonRoute and openSTA
+
+Launch OPENLANE like Day 4
+
+- cd Desktop/work/tools/openlane_working_dir/openlane/
+- docker
+- ./flow.tcl -interactive
+- package require openlane 0.9
+- prep -design picorv32a -tag 05-08_21-15
+- echo $::env(CURRENT_DEF)
+
+OPENLANE
+
+![Untitled](LAB%20Day%205%2049b7cc520b90414b9cc4ecb306dfefc4/Untitled.png)
+
+Now type: echo $::env(CURRENT_DEF)
+
+![Untitled](LAB%20Day%205%2049b7cc520b90414b9cc4ecb306dfefc4/Untitled%201.png)
+
+Now type the gen command: 
+
+- gen_pdn
+
+![Untitled](LAB%20Day%205%2049b7cc520b90414b9cc4ecb306dfefc4/Untitled%202.png)
+
+![Untitled](LAB%20Day%205%2049b7cc520b90414b9cc4ecb306dfefc4/Untitled%203.png)
+
+Finally Routing
+
+- run_routing
+
+![Untitled](LAB%20Day%205%2049b7cc520b90414b9cc4ecb306dfefc4/Untitled%204.png)
+
+![Untitled](LAB%20Day%205%2049b7cc520b90414b9cc4ecb306dfefc4/Untitled%205.png)
+
+![Untitled](LAB%20Day%205%2049b7cc520b90414b9cc4ecb306dfefc4/Untitled%206.png)
+
+This is what we obtain:
+
+I was supposed to get results, the routing after 3 hours did not finish.
+
+Let´s see it in magic
+
+- cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/05-08_21-15/results/routing/
+- ls -ltr
+
+We see this files
+
+Use the next command to open magic
+
+- magic -T /home/gchtd2210/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.def &
